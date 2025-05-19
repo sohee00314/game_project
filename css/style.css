@@ -1,0 +1,8 @@
+#stage{
+    width: 3000px;
+    height: 2000px;
+    margin: auto;
+    background-image: url("../image/stage_background.jpg");
+    background-size: cover;
+    position: relative;
+}
