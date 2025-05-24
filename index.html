@@ -5,60 +5,74 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Going Home at Night</title>
     <link rel="stylesheet" href="css/style.css">
+    <script src="js/Maps.js"></script>
     <script src="js/GamePlatform.js"></script>
+    <script src="js/Character.js"></script>
     <script>
-        let pf1 =1;
-        let pf2 =2;
-        let pf3 =3;
-        let map = [ // 한칸당 100px
-            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0],
-            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-            [3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-                ];
-        
+    let level = 0; 
+    let map = maps[level];
+    let character;
+    let speed = 30;
+    let st =null;
         // 발판생성
-        function createPF(){
+        function createPF(level){
             for(let i =0;i<map.length;i++){
                 for(let j=0;j<map[i].length;j++){
                     let stage = document.getElementById("stage");
-                    let src = "image/platform.png"
-
-                    if(map[i][j] !=0){
-                        switch(map[i][j]){
-                            case pf1:
-                                new GamePlatfrom(stage,j*100,i*100,100,100,src);
-                                break;
-                            case pf2:  
-                                new GamePlatfrom(stage,j*100,i*100,300,100,src);
-                                break;
-                            case pf3:  
-                                new GamePlatfrom(stage,j*100,i*100,500,100,src);
-                                break;
-                        }
+                    //let src = null;
+                    if(map[i][j] ==1){
+                       new GamePlatfrom(stage,j*100,i*100,101,100,"red");
                     }
                 }
             }
         }
+        function createCh(level){
+            for(let i =0;i<map.length;i++){
+                for(let j=0;j<map[i].length;j++){
+                    let stage = document.getElementById("stage");
+                    //let src = null;
+                    if(map[i][j] ==2){
+                        character = new Character(stage,j*100,i*100,90,90,0,0,"blue");
+                    }
+                }
+            }
+
+        }
+        function gameLoop(){
+            character.tick();
+            character.render();
+            
+        }
+        function play(){
+            if(st==null){
+                st = setInterval(gameLoop,10);
+            } else{
+                clearInterval(st);
+                st =null;
+            }
+
+        }
         function init(){
-            createPF();
+            createPF(level);
+            createCh(level);
+            addEventListener("keydown",function(e){
+                switch(e.keyCode){
+                    case 38 :character.velY= -speed; break;
+                    case 39 :character.velX= speed; break;
+                    case 40 :character.velY= speed; break;
+                    case 37 :character.velX= -speed; break;
+                    case 27 : play(); break;
+                }
+            });
+            addEventListener("keyup",function(e){
+                switch(e.keyCode){
+                    case 38 :character.velY= 0; break;
+                    case 39 :character.velX= 0; break;
+                    case 40 :character.velY= 0; break;
+                    case 37 :character.velX= 0; break;
+                }
+            });
+
         }
         addEventListener("load",function(){
             init();
