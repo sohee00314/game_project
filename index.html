@@ -8,11 +8,18 @@
     <script src="js/Maps.js"></script>
     <script src="js/GamePlatform.js"></script>
     <script src="js/Character.js"></script>
+    <script src="lib/common.js"></script>
+    <script src="js/Sensor.js"></script>
+    <script src="js/UpSensor.js"></script>
+    <script src="js/RightSensor.js"></script>
+    <script src="js/DownSensor.js"></script>
+    <script src="js/LeftSensor.js"></script>
     <script>
     let level = 0; 
     let map = maps[level];
     let character;
-    let speed = 30;
+    let platAarray = [];
+    let speed = 2;
     let st =null;
         // 발판생성
         function createPF(level){
@@ -21,7 +28,8 @@
                     let stage = document.getElementById("stage");
                     //let src = null;
                     if(map[i][j] ==1){
-                       new GamePlatfrom(stage,j*100,i*100,101,100,"red");
+                      let plate= new GamePlatfrom(stage,j*100,i*100,101,100,"red");
+                      platAarray.push(plate);
                     }
                 }
             }
@@ -32,7 +40,7 @@
                     let stage = document.getElementById("stage");
                     //let src = null;
                     if(map[i][j] ==2){
-                        character = new Character(stage,j*100,i*100,90,90,0,0,"blue");
+                        character = new Character(stage,j*100,i*100,90,90,0,0,"lightblue");
                     }
                 }
             }
