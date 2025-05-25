@@ -9,9 +9,11 @@ class UpSensor extends Sensor{
         for(let i=0;i<platAarray.length;i++){
             for(let j=0;j<platAarray[i].length;j++){
                 let plate = platAarray[i][j];
-                    if(collisionCheckSensor(this, plate)){
+                 if(plate !==0){
+                    if(collisionCheckBySensor(this, plate)){
                         character.y = plate.y+ plate.height+2;
                     }
+                 }
             }
         }
     

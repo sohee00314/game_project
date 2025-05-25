@@ -10,6 +10,11 @@ class Character{
         this.velY =velY;
         this.color =color;
 
+        // 점프 기능
+        this.gravity = 3;
+        this.jumpPawer = -10;
+        this.jumping =false;
+
         this.div.style.position = "absolute";
         this.div.style.left = this.x +"px";
         this.div.style.top = this.y +"px";
@@ -28,6 +33,20 @@ class Character{
         
     }
     tick(){
+        //점프기능
+        if(this.jumping == true){
+                for(let i =0; i<arrP.length;i++){
+                    if(arrP[i].y == (this.y+this.height)){
+                        if(this.y<= (arrP[i].y- this.height) && this.y>(arrP[i].y-200)){
+                            this.velY = this.jumpPawer;
+                        }
+                        else{
+                            this.velY = 0;
+                            this.jumping == false;
+                        }
+                }
+            }
+        }
         this.x += this.velX;
         this.y += this.velY;
     }

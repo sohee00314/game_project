@@ -18,33 +18,25 @@
     let level = 0; 
     let map = maps[level];
     let character;
-    let platAarray = [];
-    let speed = 2;
+    let platAarray = Array.from({length:20},()=>Array(30).fill(0));
+    let arrP = [];
+    let speed = 5;
     let st =null;
-        // 발판생성
-        function createPF(level){
-            for(let i =0;i<map.length;i++){
-                for(let j=0;j<map[i].length;j++){
-                    let stage = document.getElementById("stage");
-                    //let src = null;
+    // 발판생성
+    function createPF(level){
+        for(let i =0;i<map.length;i++){
+            for(let j=0;j<map[i].length;j++){
+                let stage = document.getElementById("stage");
                     if(map[i][j] ==1){
                       let plate= new GamePlatfrom(stage,j*100,i*100,101,100,"red");
-                      platAarray.push(plate);
+                      arrP.push(plate);
+                      platAarray[i][j] = plate;
                     }
-                }
-            }
-        }
-        function createCh(level){
-            for(let i =0;i<map.length;i++){
-                for(let j=0;j<map[i].length;j++){
-                    let stage = document.getElementById("stage");
-                    //let src = null;
                     if(map[i][j] ==2){
-                        character = new Character(stage,j*100,i*100,90,90,0,0,"lightblue");
+                        character = new Character(stage,j*100,i*100,90,100,0,0,"lightblue");
                     }
                 }
             }
-
         }
         function gameLoop(){
             character.tick();
@@ -60,23 +52,32 @@
             }
 
         }
+        function jump(){
+            if(character.jumping == false){
+                character.jumping = true
+            }
+            // else{
+            //     character = false;
+            // }
+        }
+
         function init(){
             createPF(level);
-            createCh(level);
             addEventListener("keydown",function(e){
+                console.log(e.keyCode)
                 switch(e.keyCode){
-                    case 38 :character.velY= -speed; break;
+                    case 38 :jump(); break;// 점프기능 추가 필요
                     case 39 :character.velX= speed; break;
-                    case 40 :character.velY= speed; break;
+                   // case 40 :character.velY= speed; break; 
                     case 37 :character.velX= -speed; break;
                     case 27 : play(); break;
                 }
             });
             addEventListener("keyup",function(e){
                 switch(e.keyCode){
-                    case 38 :character.velY= 0; break;
+                   // case 38 :jumpDown(); break;
                     case 39 :character.velX= 0; break;
-                    case 40 :character.velY= 0; break;
+                   // case 40 :character.velY= 0; break;
                     case 37 :character.velX= 0; break;
                 }
             });

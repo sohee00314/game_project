@@ -21,6 +21,6 @@ class Sensor{
         this.fakeX;
         this.fakeX;
     }
-    setFakeValue(fakeX,fakeY){}
+    setFakeValue(fakeX,fakeY){};
     
 }
