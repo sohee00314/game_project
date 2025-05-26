@@ -20,13 +20,14 @@
     let character;
     let platAarray = Array.from({length:20},()=>Array(30).fill(0));
     let arrP = [];
+    let stage;
     let speed = 5;
     let st =null;
     // 발판생성
     function createPF(level){
         for(let i =0;i<map.length;i++){
             for(let j=0;j<map[i].length;j++){
-                let stage = document.getElementById("stage");
+                stage = document.getElementById("stage");
                     if(map[i][j] ==1){
                       let plate= new GamePlatfrom(stage,j*100,i*100,100,100,"red");
                       arrP.push(plate);
@@ -41,6 +42,10 @@
         function gameLoop(){
             character.tick();
             character.render();
+
+            if(character.x>=2900){
+                nextMap();
+            }
             
         }
         function play(){
@@ -61,6 +66,21 @@
                 character.jumping = false;
             }
 
+        }
+        function nextMap(){
+            if(stage.contains(character.div)){
+                stage.removeChild(character.div);
+            }
+            for(let i=0; i<arrP.length; i++){
+                if(stage.contains(arrP[i].div)){
+                    stage.removeChild(arrP[i].div);
+                }
+            }
+            if(level<=maps.length){
+                ++level;
+                map = maps[level];
+                createPF(level);
+            } 
         }
 
         function init(){

@@ -12,7 +12,7 @@ class Character{
 
         // 점프 기능
         this.gravity = 0.3;
-        this.jumpPawer = -15;
+        this.jumpPawer = -12;
         this.jumping =false;
 
         this.div.style.position = "absolute";
