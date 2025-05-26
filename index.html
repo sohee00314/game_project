@@ -28,7 +28,7 @@
             for(let j=0;j<map[i].length;j++){
                 let stage = document.getElementById("stage");
                     if(map[i][j] ==1){
-                      let plate= new GamePlatfrom(stage,j*100,i*100,101,100,"red");
+                      let plate= new GamePlatfrom(stage,j*100,i*100,100,100,"red");
                       arrP.push(plate);
                       platAarray[i][j] = plate;
                     }
@@ -53,20 +53,23 @@
 
         }
         function jump(){
-           
+
             if(character.jumping == false){
                 character.jumping = true
             }
             else{
                 character.jumping = false;
-            } 
+            }
+
         }
 
         function init(){
             createPF(level);
             addEventListener("keydown",function(e){
                 switch(e.keyCode){
-                    case 38 :jump(); break;// 점프기능 추가 필요
+                    case 32 : 
+                    (character.downSensor.result)? jump() : console.log("점프중"); 
+                    break;// 점프기능 추가 필요
                     case 39 :character.velX= speed; break;
                    // case 40 :character.velY= speed; break; 
                     case 37 :character.velX= -speed; break;

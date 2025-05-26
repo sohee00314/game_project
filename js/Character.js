@@ -12,7 +12,7 @@ class Character{
 
         // 점프 기능
         this.gravity = 0.3;
-        this.jumpPawer = -10;
+        this.jumpPawer = -15;
         this.jumping =false;
 
         this.div.style.position = "absolute";
@@ -30,30 +30,31 @@ class Character{
         this.downSensor = new DownSensor(this.div, this, 10, this.height-10, this.width-20, 10, "blue");
         this.leftSensor = new LeftSensor(this.div, this, 0, 10, 10, this.height-20, "blue");
         
-
-        
     }
     tick(){
        // 점프기능 
-       //if(collisionCheckBySensor(this.downSensor, GamePlatform))
+
+
+
         if(this.jumping == true){
        
             for(let i =0; i<arrP.length;i++){
                 if(arrP[i].y >= (this.y+this.height)){
-                                if(this.y<= (arrP[i].y- this.height) && this.y>(arrP[i].y-600)){
-                                        this.velY = this.jumpPawer;
-                                    }
-                                    else{
-                                        this.jumping = false;
-                                    }
+                                if(this.y<= (arrP[i].y- this.height) && this.y>(arrP[i].y-200)){
+                                    this.velY = this.jumpPawer;
+                                    this.downSensor.result = false;
                                 }
+                                else{
+                                    this.jumping = false;
+                                }
+                            }
+                            
                 }
             }   
         
         
         
         this.velY += this.gravity;
-        console.log(this.velY);
 
         this.x += this.velX;
         this.y += this.velY;
