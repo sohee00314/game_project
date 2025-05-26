@@ -23,6 +23,8 @@
     let stage;
     let speed = 5;
     let st =null;
+    let firstX;
+    let firstY;
     // 발판생성
     function createPF(level){
         for(let i =0;i<map.length;i++){
@@ -34,7 +36,9 @@
                       platAarray[i][j] = plate;
                     }
                     if(map[i][j] ==2){
-                        character = new Character(stage,j*100,i*100,90,100,0,0,"lightblue");
+                        firstX = j*100;
+                        firstY = i*100;
+                        character = new Character(stage,firstX,firstY,90,100,0,0,"lightblue");
                     }
                 }
             }
@@ -71,16 +75,26 @@
             if(stage.contains(character.div)){
                 stage.removeChild(character.div);
             }
-            for(let i=0; i<arrP.length; i++){
+            // for(let i= arrP.lengt-1; i>=0; i--){
+            //     if(stage.contains(arrP[i].div)){
+            //         stage.removeChild(arrP[i].div);
+            //     }
+            //     arrP.splice(0,1);
+            // }
+            for(let i = arrP.length - 1; i >= 0; i--){
                 if(stage.contains(arrP[i].div)){
-                    stage.removeChild(arrP[i].div);
+                stage.removeChild(arrP[i].div);
                 }
+            arrP.splice(i, 1);
             }
+
             if(level<=maps.length){
                 ++level;
                 map = maps[level];
                 createPF(level);
-            } 
+            } else{
+                alert("END");
+            }
         }
 
         function init(){

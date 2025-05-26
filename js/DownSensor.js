@@ -22,6 +22,5 @@ class DownSensor extends Sensor{
                 }
             
         } 
-        console.log(this.result);
     }
 }

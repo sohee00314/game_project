@@ -33,9 +33,6 @@ class Character{
     }
     tick(){
        // 점프기능 
-
-
-
         if(this.jumping == true){
        
             for(let i =0; i<arrP.length;i++){
@@ -43,27 +40,34 @@ class Character{
                                 if(this.y<= (arrP[i].y- this.height) && this.y>(arrP[i].y-200)){
                                     this.velY = this.jumpPawer;
                                     this.downSensor.result = false;
+                                    
                                 }
                                 else{
                                     this.jumping = false;
                                 }
                             }
                             
-                }
-            }   
-        
-        
-        
+                        }
+                    }  
+                    
         this.velY += this.gravity;
 
         this.x += this.velX;
         this.y += this.velY;
+        //console.log(this.y);
+
+        
+        
     }
     render(){
         this.upSensor.setFakeValue(10,0);
         this.rightSensor.setFakeValue(this.width-10,10);
         this.downSensor.setFakeValue(10,this.height-10);
         this.leftSensor.setFakeValue(0,10);
+        
+        if(this.x<=0 ){
+            this.x = firstX;
+        }
 
         this.div.style.left = this.x +"px";
         this.div.style.top = this.y +"px";
