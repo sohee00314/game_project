@@ -53,18 +53,18 @@
 
         }
         function jump(){
+           
             if(character.jumping == false){
                 character.jumping = true
             }
-            // else{
-            //     character = false;
-            // }
+            else{
+                character.jumping = false;
+            } 
         }
 
         function init(){
             createPF(level);
             addEventListener("keydown",function(e){
-                console.log(e.keyCode)
                 switch(e.keyCode){
                     case 38 :jump(); break;// 점프기능 추가 필요
                     case 39 :character.velX= speed; break;
@@ -75,7 +75,7 @@
             });
             addEventListener("keyup",function(e){
                 switch(e.keyCode){
-                   // case 38 :jumpDown(); break;
+                   // case 38 :character.jumping = false; break;
                     case 39 :character.velX= 0; break;
                    // case 40 :character.velY= 0; break;
                     case 37 :character.velX= 0; break;

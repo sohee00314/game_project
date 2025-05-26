@@ -14,9 +14,8 @@ class DownSensor extends Sensor{
                     if(collisionCheckBySensor(this, plate)){
                         character.y = plate.y-character.height;
                         character.velY =0;
-                        character.jumping = false;
-
                     }
+                    
                 }
             }
         }
