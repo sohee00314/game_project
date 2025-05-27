@@ -10,12 +10,12 @@ class DownSensor extends Sensor{
         this.fakeY =this.character.y + fakeY;
         let plate;
         
-        for(let i=0;i<map.length;i++){
-            for(let j=0;j<map[i].length;j++){
-                plate = map[i][j]; 
-                console.log(plate);
-                if(plate == 1){
-                    console.log(plate);
+        for(let i=0;i<platAarray.length;i++){
+            for(let j=0;j<platAarray[i].length;j++){
+                plate = platAarray[i][j]; 
+                //console.log(plate);
+                if(plate !==0){
+                    //console.log(plate);
                     if( collisionCheckBySensor(this, plate)){
                         this.character.y = plate.y-this.character.height-1;
                         this.character.velY =0;

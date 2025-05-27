@@ -35,7 +35,7 @@ class Character{
        // 점프기능 
         if(this.jumping == true){
        
-            for(let i =0; i<arrp.length;i++){
+            for(let i =0; i<arrP.length;i++){
                 if(arrP[i].y >= (this.y+this.height)){
                                 if(this.y<= (arrP[i].y- this.height) && this.y>(arrP[i].y-200)){
                                     this.velY = this.jumpPawer;
