@@ -18,7 +18,7 @@
     let level = 0; 
     let map = maps[level];
     let character;
-    let platAarray = Array.from({length:20},()=>Array(30).fill(0));
+   // let platAarray = Array.from({length:20},()=>Array(30).fill(0));
     let arrP = [];
     let stage;
     let speed = 5;
@@ -33,7 +33,7 @@
                     if(map[i][j] ==1){
                       let plate= new GamePlatfrom(stage,j*100,i*100,100,100,"red");
                       arrP.push(plate);
-                      platAarray[i][j] = plate;
+                      map[i][j] = plate;
                     }
                     if(map[i][j] ==2){
                         firstX = j*100;

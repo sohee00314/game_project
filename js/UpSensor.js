@@ -6,10 +6,11 @@ class UpSensor extends Sensor{
         this.fakeX = this.character.x + fakeX;
         this.fakeY =this.character.y + fakeY;
         
-        for(let i=0;i<platAarray.length;i++){
-            for(let j=0;j<platAarray[i].length;j++){
-                let plate = platAarray[i][j];
-                 if(plate !==0){
+        for(let i=0;i<map.length;i++){
+            for(let j=0;j<map[i].length;j++){
+                let plate = map[i][j];
+                 if(plate ==1){
+                    console.log(plate);
                     if(collisionCheckBySensor(this, plate)){
                         character.y = plate.y+ plate.height+2;
                     }
