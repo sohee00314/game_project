@@ -13,9 +13,7 @@ class DownSensor extends Sensor{
         for(let i=0;i<platAarray.length;i++){
             for(let j=0;j<platAarray[i].length;j++){
                 plate = platAarray[i][j]; 
-                //console.log(plate);
-                if(plate !==0){
-                    //console.log(plate);
+                if(plate !==0 && plate !==3){
                     if( collisionCheckBySensor(this, plate)){
                         this.character.y = plate.y-this.character.height-1;
                         this.character.velY =0;

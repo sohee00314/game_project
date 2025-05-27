@@ -30,12 +30,15 @@
             for(let j=0;j<map[i].length;j++){
                 stage = document.getElementById("stage");
                     if(map[i][j] ==1){
-                      let plate= new GamePlatfrom(stage,j*100,i*100,100,100,"red");
+                      let plate= new GamePlatfrom(stage,j*100,i*100,100,100,"image/plate.jpg");
                       arrP.push(plate);
                       platAarray[i][j] = plate;
                     }
                     if(map[i][j] ==2){
-                        character = new Character(stage,j*100,i*100,90,100,0,0,"lightblue");
+                        character = new Character(stage,j*100,i*100,100,200,0,0,"lightblue");
+                    }
+                    if(map[i][j] ==3){
+                        let home = new GamePlatfrom(stage,j*100,i*100,500,500,"image/home.png");
                     }
                 }
             }
@@ -60,11 +63,11 @@
         }
         function jump(){
 
-            if(character.jumping == false){
-                character.jumping = true
+            if(character.jumpMove == false){
+                character.jumpMove = true
             }
             else{
-                character.jumping = false;
+                character.jumpMove = false;
             }
 
         }
@@ -85,8 +88,7 @@
 
             if(level<maps.length-1){
                 ++level;
-                map = maps[level];
-                // platAarray = Array.from({length:20},()=>Array(30).fill(0));                
+                map = maps[level];              
                 createPF(level);
                 return;
             }
@@ -98,17 +100,16 @@
                     case 32 : 
                     (character.downSensor.result)? jump() : console.log("점프중"); 
                     break;// 점프기능 추가 필요
-                    case 39 :character.velX= speed; break;
-                   // case 40 :character.velY= speed; break; 
-                    case 37 :character.velX= -speed; break;
+                    case 39 :
+                        character.velX= speed; break;
+                    case 37 :
+                        character.velX= -speed; break;
                     case 27 : play(); break;
                 }
             });
             addEventListener("keyup",function(e){
                 switch(e.keyCode){
-                   // case 38 :character.jumping = false; break;
                     case 39 :character.velX= 0; break;
-                   // case 40 :character.velY= 0; break;
                     case 37 :character.velX= 0; break;
                 }
             });
