@@ -23,8 +23,7 @@
     let stage;
     let speed = 5;
     let st =null;
-    let firstX;
-    let firstY;
+  
     // 발판생성
     function createPF(level){
         for(let i =0;i<map.length;i++){
@@ -36,9 +35,7 @@
                       platAarray[i][j] = plate;
                     }
                     if(map[i][j] ==2){
-                        firstX = j*100;
-                        firstY = i*100;
-                        character = new Character(stage,firstX,firstY,90,100,0,0,"lightblue");
+                        character = new Character(stage,j*100,i*100,90,100,0,0,"lightblue");
                     }
                 }
             }
@@ -47,7 +44,7 @@
             character.tick();
             character.render();
 
-            if(character.x>=2900){
+            if(character.x>=3000){
                 nextMap();
             }
             
@@ -72,26 +69,8 @@
 
         }
         function nextMap(){
-            /*
-            if(stage.contains(character.div)){
-                stage.removeChild(character.div);
-            }
-            */
-            // for(let i= arrP.lengt-1; i>=0; i--){
-            //     if(stage.contains(arrP[i].div)){
-            //         stage.removeChild(arrP[i].div);
-            //     }
-            //     arrP.splice(0,1);
-            // }
-            /*
-            for(let i = arrP.length - 1; i >= 0; i--){
-                if(stage.contains(arrP[i].div)){
-                    stage.removeChild(arrP[i].div);
-                }
-                arrP.splice(i, 1);
-            }
-            */
             
+            character.next();
             //클리어된 스테이지 발판 제거
             for(let i=0;i<platAarray.length;i++){
                 for(let a=0;a<platAarray[i].length;a++){
@@ -101,18 +80,17 @@
                     }
                 }
             };
+            arrP = [];
             platAarray = Array.from({length:20},()=>Array(30).fill(0));  
 
-            if(level<=maps.length){
+            if(level<maps.length-1){
                 ++level;
                 map = maps[level];
                 // platAarray = Array.from({length:20},()=>Array(30).fill(0));                
                 createPF(level);
-            } else{
-                alert("END");
+                return;
             }
         }
-
         function init(){
             createPF(level);
             addEventListener("keydown",function(e){

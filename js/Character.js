@@ -10,6 +10,15 @@ class Character{
         this.velY =velY;
         this.color =color;
 
+        // X,Y의 시작 위치
+        this.startX =x;
+        this.startY =y;
+
+        // X,Y의 마지막 위치
+        this.lastX;
+        this.lastY;
+
+
         // 점프 기능
         this.gravity = 0.3;
         this.jumpPawer = -12;
@@ -65,11 +74,28 @@ class Character{
         this.downSensor.setFakeValue(10,this.height-10);
         this.leftSensor.setFakeValue(0,10);
         
-        if(this.x<=0 ){
-            this.x = firstX;
+       // 떨어질 때 지정된 위치로 캐릭터 이동
+        if(this.x<=0 ||this.y>2000){
+            this.x = this.startX;
+            this.y = this.startY;
+            return;
         }
-
+        
+        // 마지막 위치 저장
+        this.lastX = this.x;
+        this.lastY = this.y;
+        
         this.div.style.left = this.x +"px";
         this.div.style.top = this.y +"px";
+        
     }
+    // 다음 맴 이동 시 위치
+    next(){
+        this.startX = this.lastX-2800;
+        this.startY = this.lastY-10;
+        this.x = this.startX;
+        this.y = this.startY;
+        return;
+    }
+
 }
