@@ -19,6 +19,7 @@
     let map = maps[level];
     let character;
     let platAarray = Array.from({length:20},()=>Array(30).fill(0));
+    let objectAarray = Array.from({length:20},()=>Array(30).fill(0));
     let arrP = [];
     let stage;
     let speed = 5;
@@ -40,6 +41,22 @@
                     if(map[i][j] ==3){
                         let home = new GamePlatfrom(stage,j*100,i*100,500,500,"image/home.png");
                     }
+                    if(map[i][j] ==4){
+                      objectAarray[i][j] = new GamePlatfrom(stage,j*100,i*100,450,450,"image/building1.png");
+                    }
+                    if(map[i][j] ==5){
+                         objectAarray[i][j] = new GamePlatfrom(stage,j*100,i*100,450,450,"image/building2.png");
+                    }
+                    if(map[i][j] ==6){
+                         objectAarray[i][j] = new GamePlatfrom(stage,j*100,i*100,450,450,"image/building3.png");
+                    }
+                    if(map[i][j] ==7){
+                         objectAarray[i][j] = new GamePlatfrom(stage,j*100,i*100,450,450,"image/tree.png");
+                    }
+                    if(map[i][j] ==8){
+                         objectAarray[i][j] = new GamePlatfrom(stage,j*100,i*100,450,450,"image/light.png");
+                    }
+                    
                 }
             }
     }
@@ -55,10 +72,6 @@
             nextMap(); // 다음 맵으로 이동
         }
     }
-
-        // if(character.x>=3000){
-        //     nextMap();
-        // }
         
     function play(){
         if(st==null){
@@ -81,8 +94,17 @@
                 }
             }
         };
+        for(let i=0;i<objectAarray.length;i++){
+            for(let a=0;a<objectAarray[i].length;a++){
+                let plat=objectAarray[i][a];
+                if(plat !=0){
+                    stage.removeChild(plat.div);
+                }
+            }
+        };
         arrP = [];
-        platAarray = Array.from({length:20},()=>Array(30).fill(0));  
+        platAarray = Array.from({length:20},()=>Array(30).fill(0));
+        objectAarray = Array.from({length:20},()=>Array(30).fill(0));  
 
         if(level<maps.length-1){
             ++level;
@@ -102,6 +124,7 @@
 
     function init(){
         createPF(level);
+        play();
         addEventListener("keydown",function(e){
             switch(e.keyCode){
                 case 32 : (character.downSensor.result)? character.jumpMove = true : console.log("점프중"); break;// 점프기능 추가 필요
@@ -116,6 +139,12 @@
                 case 37 :character.velX= 0; break;
             }
         });
+        document.querySelector("a").addEventListener("mouseover",function(){
+            this.style.color = "yellow";
+        });
+        document.querySelector("a").addEventListener("mouseout",function(){
+            this.style.color = "";
+        });
 
     }
     addEventListener("load",function(){
@@ -126,8 +155,8 @@
 <body>
     <div id="stage">
         <div id="modal" class="modal">
-            <div id="model_content">
-                <button>종료</button>
+            <div id="modal_content">
+                <a href="titlescreen.html" >Home Sweet Home ~</a>
             </div>
         </div>
     </div>

@@ -160,12 +160,12 @@ class Character{
             }else{
                 this.walkMove = false;
             }
-        },100);
+        },700);
     }
     
     jumping() {
       this.div.style.backgroundImage = `url(${this.jumpArray[this.b]})`;
-     // console.log(`url(${this.jumpArray[this.b]})`);
+     console.log(`url(${this.jumpArray[this.b]})`);
       this.b++;
       if(this.b>=this.jumpArray.length) this.b =0;
 
@@ -178,7 +178,7 @@ class Character{
         this.walkMove = true;
       }
       
-    },300);
+    },700);
 
     }
      
