@@ -19,7 +19,7 @@ class DownSensor extends Sensor{
                         this.character.velY =0;
                         return this.result = true;
                         
-                    }
+                    } 
                 }
                 }
             

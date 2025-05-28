@@ -46,6 +46,7 @@ class Character{
         
         
         this.jumpArray = []; // 점프이미지 배열
+        this.jumpLoop = null;
         for(let i=1;i<=10;i++){
             let img = `../image/jump/jp${i}.jpg`;
             this.jumpArray.push(img);
@@ -87,7 +88,7 @@ class Character{
         this.x += this.velX;
         this.y += this.velY;
         
-        if(this.velX !== 0 && !this.walkMove){
+        if(this.velX !== 0 && !this.walkMove && this.downSensor.result){
             this.walking()
             // 이미지 반전 처리
             if (this.velX < 0) {
@@ -100,7 +101,20 @@ class Character{
             this.walkMove = false;
         }
         
-       
+        // 점프 무한 루프
+        if(this.velY<0){
+            clearTimeout(this.walkLoop);
+            this.walkMove = false;
+            this.jumping();
+        }
+        else{
+            clearTimeout(this.jumpLoop);
+        }
+        
+        // if(this.velY>=0 && this.downSensor.result == false){
+        //     this.div.style.backgroundImage = `url(../image/jump/jp5.jpg)`;
+        // }
+        
         
     }
     render(){
@@ -145,16 +159,27 @@ class Character{
             }else{
                 this.walkMove = false;
             }
-                        },1000);
-    }
-
-    jumping(){ // 점프 이미지 무한 루프
-        this.div.style.backgroundImage = `url(${this.jumpArray[this.a]})`;
-        console.log(this.jumpArray[this.a]);
-        this.a++;
-         if(this.a>9) this.a=0;
-
+        },100);
     }
     
+    jumping(){ // 점프 이미지 무한 루프
+        clearTimeout(this.jumpLoop);
+
+        if(this.velY<0){ // 위로 올라가는 중인 이미지 0~4
+            this.div.style.backgroundImage = `url(${this.jumpArray[this.a]})`;
+            this.a++
+            if(this.a>5) this.a = 0; 
+            
+        }
+        else{// 아래로 내려가는 이미지 5~9
+            this.div.style.backgroundImage = `url(${this.jumpArray[this.a]})`;
+            this.a++
+            if(this.a<4 || this.a>10) this.a =5; 
+        }
+        console.log(`url(${this.jumpArray[this.a]})`);
+
+        this.jumpLoop = setTimeout(()=>{this.jumping();},100);
+    }
+     
     
 }

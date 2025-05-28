@@ -61,16 +61,6 @@
             }
 
         }
-        function jump(){
-
-            if(character.jumpMove == false){
-                character.jumpMove = true
-            }
-            else{
-                character.jumpMove = false;
-            }
-
-        }
         function nextMap(){
             
             character.next();
@@ -91,19 +81,17 @@
                 map = maps[level];              
                 createPF(level);
                 return;
+            }else{
+                // 목적지 도착 시 엔딩 장면 추가 -------------------------------------
             }
         }
         function init(){
             createPF(level);
             addEventListener("keydown",function(e){
                 switch(e.keyCode){
-                    case 32 : 
-                    (character.downSensor.result)? jump() : console.log("점프중"); 
-                    break;// 점프기능 추가 필요
-                    case 39 :
-                        character.velX= speed; break;
-                    case 37 :
-                        character.velX= -speed; break;
+                    case 32 : (character.downSensor.result)? character.jumpMove = true : console.log("점프중"); break;// 점프기능 추가 필요
+                    case 39 :character.velX= speed; break;
+                    case 37 :character.velX= -speed; break;
                     case 27 : play(); break;
                 }
             });
