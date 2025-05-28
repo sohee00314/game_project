@@ -38,6 +38,7 @@ class Character{
         this.walkArray = []; // 걷는 이미지 배열
         this.walkLoop =null; // waking()의 루프
         this.a= 0; // walking()을 위한 증가값 초기화
+        this.b=0; 
         for(let i=1;i<=5;i++){
             let img = `../image/walk/walk${i}.jpg`;
             this.walkArray.push(img);
@@ -47,7 +48,7 @@ class Character{
         
         this.jumpArray = []; // 점프이미지 배열
         this.jumpLoop = null;
-        for(let i=1;i<=10;i++){
+        for(let i=1;i<=5;i++){
             let img = `../image/jump/jp${i}.jpg`;
             this.jumpArray.push(img);
         }
@@ -162,23 +163,23 @@ class Character{
         },100);
     }
     
-    jumping(){ // 점프 이미지 무한 루프
-        clearTimeout(this.jumpLoop);
+    jumping() {
+      this.div.style.backgroundImage = `url(${this.jumpArray[this.b]})`;
+     // console.log(`url(${this.jumpArray[this.b]})`);
+      this.b++;
+      if(this.b>=this.jumpArray.length) this.b =0;
 
-        if(this.velY<0){ // 위로 올라가는 중인 이미지 0~4
-            this.div.style.backgroundImage = `url(${this.jumpArray[this.a]})`;
-            this.a++
-            if(this.a>5) this.a = 0; 
-            
-        }
-        else{// 아래로 내려가는 이미지 5~9
-            this.div.style.backgroundImage = `url(${this.jumpArray[this.a]})`;
-            this.a++
-            if(this.a<4 || this.a>10) this.a =5; 
-        }
-        console.log(`url(${this.jumpArray[this.a]})`);
+    this.jumpLoop = setTimeout(()=>{
+      if(this.velY<0){
+        clearTimeout(this.walkLoop);
+        this.walkMove = false;
+          this.jumping()  
+      }else{
+        this.walkMove = true;
+      }
+      
+    },300);
 
-        this.jumpLoop = setTimeout(()=>{this.jumping();},100);
     }
      
     

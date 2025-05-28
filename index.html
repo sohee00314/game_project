@@ -42,73 +42,94 @@
                     }
                 }
             }
-        }
-        function gameLoop(){
-            character.tick();
-            character.render();
+    }
+    function gameLoop(){
+        character.tick();
+        character.render();
 
-            if(character.x>=3000){
-                nextMap();
-            }
-            
+        if(level == maps.length-1 && character.x >2700){
+            end();
         }
-        function play(){
-            if(st==null){
-                st = setInterval(gameLoop,10);
-            } else{
-                clearInterval(st);
-                st =null;
-            }
 
+        if (character.x >= 3000) {
+            nextMap(); // 다음 맵으로 이동
         }
-        function nextMap(){
-            
-            character.next();
-            //클리어된 스테이지 발판 제거
-            for(let i=0;i<platAarray.length;i++){
-                for(let a=0;a<platAarray[i].length;a++){
-                    let plat=platAarray[i][a];
-                    if(plat !=0){
-                        stage.removeChild(plat.div);
-                    }
+    }
+
+        // if(character.x>=3000){
+        //     nextMap();
+        // }
+        
+    function play(){
+        if(st==null){
+            st = setInterval(gameLoop,10);
+        } else{
+            clearInterval(st);
+            st =null;
+        }
+
+    }
+    function nextMap(){
+        
+        character.next();
+        //클리어된 스테이지 발판 제거
+        for(let i=0;i<platAarray.length;i++){
+            for(let a=0;a<platAarray[i].length;a++){
+                let plat=platAarray[i][a];
+                if(plat !=0){
+                    stage.removeChild(plat.div);
                 }
-            };
-            arrP = [];
-            platAarray = Array.from({length:20},()=>Array(30).fill(0));  
-
-            if(level<maps.length-1){
-                ++level;
-                map = maps[level];              
-                createPF(level);
-                return;
-            }else{
-                // 목적지 도착 시 엔딩 장면 추가 -------------------------------------
             }
-        }
-        function init(){
+        };
+        arrP = [];
+        platAarray = Array.from({length:20},()=>Array(30).fill(0));  
+
+        if(level<maps.length-1){
+            ++level;
+            map = maps[level];              
             createPF(level);
-            addEventListener("keydown",function(e){
-                switch(e.keyCode){
-                    case 32 : (character.downSensor.result)? character.jumpMove = true : console.log("점프중"); break;// 점프기능 추가 필요
-                    case 39 :character.velX= speed; break;
-                    case 37 :character.velX= -speed; break;
-                    case 27 : play(); break;
-                }
-            });
-            addEventListener("keyup",function(e){
-                switch(e.keyCode){
-                    case 39 :character.velX= 0; break;
-                    case 37 :character.velX= 0; break;
-                }
-            });
+            return;
+        } 
+        
 
-        }
-        addEventListener("load",function(){
-            init();
+    }
+
+    function end(){
+        // 목적지 도착 시 엔딩 장면 추가
+        clearInterval(st);
+        document.getElementById("modal").style.display = "block";
+    }
+
+    function init(){
+        createPF(level);
+        addEventListener("keydown",function(e){
+            switch(e.keyCode){
+                case 32 : (character.downSensor.result)? character.jumpMove = true : console.log("점프중"); break;// 점프기능 추가 필요
+                case 39 :character.velX= speed; break;
+                case 37 :character.velX= -speed; break;
+                case 27 : play(); break;
+            }
         });
+        addEventListener("keyup",function(e){
+            switch(e.keyCode){
+                case 39 :character.velX= 0; break;
+                case 37 :character.velX= 0; break;
+            }
+        });
+
+    }
+    addEventListener("load",function(){
+        init();
+    });
     </script>
 </head>
 <body>
-    <div id="stage"></div>
+    <div id="stage">
+        <div id="modal" class="modal">
+            <div id="model_content">
+                <button>종료</button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
