@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Going Home at Night</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/Maps.js"></script>
+    <script src="js/GamePlatform.js"></script>
+    <script src="js/Character.js"></script>
+    <script src="js/GameAudio.js"></script>
+    <script src="lib/common.js"></script>
+    <script src="js/Sensor.js"></script>
+    <script src="js/UpSensor.js"></script>
+    <script src="js/RightSensor.js"></script>
+    <script src="js/DownSensor.js"></script>
+    <script src="js/LeftSensor.js"></script>
+    <script>
+    let level = 0; 
+    let map = maps[level];
+    let character;
+    let platAarray = Array.from({length:20},()=>Array(30).fill(0));
+    let objectAarray = Array.from({length:20},()=>Array(30).fill(0));
+    let arrP = [];
+    let stage;
+    let speed = 5;
+    let st =null;
+    let audio;
+  
+    // 발판생성
+    function createPF(level){
+        for(let i =0;i<map.length;i++){
+            for(let j=0;j<map[i].length;j++){
+                stage = document.getElementById("stage");
+                    if(map[i][j] ==1){
+                      let plate= new GamePlatfrom(stage,j*100,i*100,100,100,"image/plate.jpg");
+                      arrP.push(plate);
+                      platAarray[i][j] = plate;
+                    }
+                    if(map[i][j] ==2){
+                        character = new Character(stage,j*100,i*100,100,200,0,0,"");
+                    }
+                    if(map[i][j] ==3){
+                        let home = new GamePlatfrom(stage,j*100,i*100,500,500,"image/home.png");
+                    }
+                    if(map[i][j] ==4){
+                      objectAarray[i][j] = new GamePlatfrom(stage,j*100,i*100,450,450,"image/building1.png");
+                    }
+                    if(map[i][j] ==5){
+                         objectAarray[i][j] = new GamePlatfrom(stage,j*100,i*100,450,450,"image/building2.png");
+                    }
+                    if(map[i][j] ==6){
+                         objectAarray[i][j] = new GamePlatfrom(stage,j*100,i*100,450,450,"image/building3.png");
+                    }
+                    if(map[i][j] ==7){
+                         objectAarray[i][j] = new GamePlatfrom(stage,j*100,i*100,450,450,"image/tree.png");
+                    }
+                    if(map[i][j] ==8){
+                         objectAarray[i][j] = new GamePlatfrom(stage,j*100,i*100,450,450,"image/light.png");
+                    }
+                    
+                }
+            }
+    }
+    function gameLoop(){
+        character.tick();
+        character.render();
+
+        if(level == maps.length-1 && character.x >2700){
+            end();
+        }
+
+        if (character.x >= 3000) {
+            nextMap(); // 다음 맵으로 이동
+        }
+    }
+        
+    function play(){
+        if(st==null){
+            st = setInterval(gameLoop,10);
+        if (!audio.isPlaying()) {
+            audio.play();
+            }
+
+        } else{
+            clearInterval(st);
+            st =null;
+            audio.pause();
+        }
+
+    }
+    function nextMap(){
+        
+        character.next();
+        //클리어된 스테이지 발판 제거
+        for(let i=0;i<platAarray.length;i++){
+            for(let a=0;a<platAarray[i].length;a++){
+                let plat=platAarray[i][a];
+                if(plat !=0){
+                    stage.removeChild(plat.div);
+                }
+            }
+        };
+        for(let i=0;i<objectAarray.length;i++){
+            for(let a=0;a<objectAarray[i].length;a++){
+                let plat=objectAarray[i][a];
+                if(plat !=0){
+                    stage.removeChild(plat.div);
+                }
+            }
+        };
+        arrP = [];
+        platAarray = Array.from({length:20},()=>Array(30).fill(0));
+        objectAarray = Array.from({length:20},()=>Array(30).fill(0));  
+
+        if(level<maps.length-1){
+            ++level;
+            map = maps[level];              
+            createPF(level);
+            return;
+        } 
+        
+
+    }
+
+    function end(){
+        // 목적지 도착 시 엔딩 장면 추가
+        clearInterval(st);
+        audio.pause();
+        document.getElementById("modal").style.display = "block";
+    }
+
+    // 초기 설정
+    function init(){
+        createPF(level);
+        audio = new GameAudio("image/sound.mp3");
+
+
+        // 시작 버튼 
+        document.getElementById("bt_start").addEventListener('click',function(){
+            document.getElementById("titlescreen").style.display = "none";
+            stage.style.display = "block";
+            // audio.play();
+            play();
+        });
+
+        // 동작 버튼
+        addEventListener("keydown",function(e){
+            switch(e.keyCode){
+                case 32 : (character.downSensor.result)? character.jumpMove = true : console.log("점프중"); break;// 점프기능 추가 필요
+                case 39 :character.velX= speed; break;
+                case 37 :character.velX= -speed; break;
+                case 27 : play(); break;
+            }
+        });
+        addEventListener("keyup",function(e){
+            switch(e.keyCode){
+                case 39 :character.velX= 0; break;
+                case 37 :character.velX= 0; break;
+            }
+        });
+
+        //앤딩관련 이밴트
+        document.querySelector("a").addEventListener("mouseover",function(){
+            this.style.color = "yellow";
+        });
+        document.querySelector("a").addEventListener("mouseout",function(){
+            this.style.color = "";
+        });
+        document.querySelector("a").addEventListener("click",function(){
+
+            location.reload(); // 화면 새로고침
+
+        });
+
+    }
+    addEventListener("load",function(){
+        init();
+    });
+    </script>
+</head>
+<body>
+    <div id="wrapper">
+
+        <div id="titlescreen">
+            <div id="title">
+                <h3>Going to</h3>
+                <h2>Sweet Home at Night</h2>
+            </div>
+            <div id="start">
+                <button id="bt_start">Game Start</button>
+            </div>
+        </div>
+        <div id="stage">
+            <div id="modal" class="modal">
+                <div id="modal_content">
+                    <a href="#" >
+                        Home Sweet Home ~</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
