@@ -1,5 +1,0 @@
-class Sound{
-    constructor(){
-        
-    }
-}

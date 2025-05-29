@@ -1,12 +1,21 @@
+#wrapper{
+    width: 3000px;
+    height: 2000px;
+    position: relative;
+    margin: auto;
+}
+
+
 #stage{
     width: 3000px;
     height: 2000px;
     margin: auto;
     background-image: url("../image/stage_background.jpg");
     background-size: cover;
-    position: relative;
+    position: absolute;
     z-index: 1;
     overflow: hidden;
+    display: none;
 }
 
 /* 엔딩div css */
@@ -42,14 +51,15 @@
 }
 
 /* 타이틀 화면 css */
-#wrapper{
+#titlescreen{
     width: 3000px;
     height: 2000px;
     margin: auto;
-    position: relative;
+    position: absolute;
     background-color: aquamarine;
     background-image: url("../image/startimg.png");
     background-size: cover;
+    display: block;
     
 }
 #title{
