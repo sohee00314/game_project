@@ -34,13 +34,13 @@ class Character{
         
         // 캐릭터에 걷는 이미지 삽입
         this.walkMove = false;
-        this.div.style.backgroundImage = `url("../image/walk/walk1.png")`;
+        this.div.style.backgroundImage = `url("./image/walk/walk1.png")`;
         this.walkArray = []; // 걷는 이미지 배열
         this.walkLoop =null; // waking()의 루프
         this.a= 0; // walking()을 위한 증가값 초기화
         this.b=0; 
         for(let i=1;i<=5;i++){
-            let img = `../image/walk/walk${i}.png`;
+            let img = `./image/walk/walk${i}.png`;
             this.walkArray.push(img);
         }
         this.div.style.backgroundSize = "cover";
@@ -49,7 +49,7 @@ class Character{
         this.jumpArray = []; // 점프이미지 배열
         this.jumpLoop = null;
         for(let i=1;i<=6;i++){
-            let img = `../image/jump/jp${i}.png`;
+            let img = `./image/jump/jp${i}.png`;
             this.jumpArray.push(img);
         }
 
