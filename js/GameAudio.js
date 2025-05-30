@@ -2,7 +2,7 @@
     constructor(path){
         this.audio = new Audio(path);
         this.audio.load();
-        this.audioLoop = true;
+        this.audio.loop = true;
         
     }
      
