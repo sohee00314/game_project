@@ -1,4 +1,4 @@
-# 🏙️ 밤거리 귀가 게임 (Going to Sweet Home at Night)
+# 🏙️ Going to Sweet Home at Night
 
 도시의 높은 건물들 사이로 펼쳐지는 밤거리.  
 플레이어는 피곤한 하루를 마치고 집으로 향합니다.  
