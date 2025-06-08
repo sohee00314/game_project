@@ -1,0 +1,119 @@
+#wrapper{
+    width: 3000px;
+    height: 2000px;
+    position: relative;
+    margin: auto;
+}
+
+
+#stage{
+    width: 3000px;
+    height: 2000px;
+    margin: auto;
+    background-image: url("../image/stage_background.jpg");
+    background-size: cover;
+    position: absolute;
+    z-index: 1;
+    overflow: hidden;
+    display: none;
+}
+
+/* 엔딩div css */
+#modal{
+    display: none;
+    position: absolute;
+    width: 3000px;
+    height: 2000px;
+    z-index: 99;
+    top: 0;
+    left: 0;
+    background-color: aqua;
+    background-image: url("../image/endimg.png");
+    background-size: cover;
+}
+#modal_content{
+    width: 1000px;
+    height: 300px;
+    position: absolute;
+    left: 400px;
+    top: 1100px;
+    /* background-color: lightblue; */
+    z-index: 999;
+    text-align: center;
+    
+}
+#modal_content a {
+    font-size: 150px;
+    text-decoration-line: none;
+    color: black;
+    font-family: 'Times New Roman', Times, serif;
+     font-style: italic;
+}
+
+/* 타이틀 화면 css */
+#titlescreen{
+    width: 3000px;
+    height: 2000px;
+    margin: auto;
+    position: absolute;
+    background-color: aquamarine;
+    background-image: url("../image/startimg.png");
+    background-size: cover;
+    display: block;
+    
+}
+#title{
+    width: 1900px;
+    height: 400px;
+    left: 200px;
+    top: 300px;
+    position: absolute;
+    /* background-color: antiquewhite; */
+    
+}
+#title h3{
+    font-size: 80px;
+    margin: 0;
+    font-family: 'Courier New', Courier, monospace;
+    color: rgb(118, 184, 57);
+}
+#title h2{
+    font-size: 200px;
+    margin: 0;
+    font-family:'Times New Roman', Times, serif;
+    font-style: italic;
+    color: rgb(240, 240, 108);
+}
+#start{
+    width: 1000px;
+    height: 200px;
+    position: absolute;
+    /* background-color: cadetblue; */
+    left: 500px;
+    top: 800px;
+    text-align: center;
+}
+#bt_start {
+    width: 1000px;
+    height: 200px;
+    font-size: 100px;
+    padding: 20px;
+    color: white;
+    background: linear-gradient(135deg, #7b2ff7, #f107a3); /* 보라 + 핑크 그라디언트 */
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(123, 47, 247, 0.4); /* 보라빛 그림자 */
+    cursor: pointer;
+    font-family: 'Times New Roman', Times, serif;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+#bt_start:hover {
+    transform: scale(1.05);
+    box-shadow: 0 15px 40px rgba(123, 47, 247, 0.6);
+}
+
+
+
+
