@@ -1,5 +1,6 @@
 # 🏙️ Going to Sweet Home at Night
 ![easyme](/image/readme/titlescreen.JPG) 
+
 도시의 높은 건물들 사이로 펼쳐지는 밤거리.  
 플레이어는 피곤한 하루를 마치고 집으로 향합니다.  
 걷고, 점프하고, 발판을 건너며 집에 무사히 도착하세요!
@@ -35,13 +36,19 @@
 ---
 ## 개발환경
 -**언어**
+
 ![easyme](image/readme/js.png) 
 ![easyme](image/readme/css.png) 
 ![easyme](image/readme/html.png) 
+
 -**개발도구**
+
 ![easyme](image/readme/visual.png) 
+
 -**버전관리**
+
 ![easyme](image/readme/gitpub.png) 
 ![easyme](image/readme/git.png) 
+
 ## 대표 코드 설명
 ![easyme](image/readme/carbon.jpg) 
